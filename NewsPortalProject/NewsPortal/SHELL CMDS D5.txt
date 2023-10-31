@@ -1,0 +1,37 @@
+from news.models import *
+
+user1 = User.objects.create_user('User 1')
+user2 = User.objects.create_user('User 2')
+author1 = Author.objects.create(author_user=user1)
+author2 = Author.objects.create(author_user=user2)
+category1 = Category.objects.create(name='Category name 1')
+category2 = Category.objects.create(name='Category name 2')
+category3 = Category.objects.create(name='Category name 3')
+category4 = Category.objects.create(name='Category name 4')
+post1 = Post.objects.create(post_author=author1, post_type='ARTICLE', post_title='post1 title', post_content='post1 content')
+post2 = Post.objects.create(post_author=author2, post_type='ARTICLE', post_title='post2 title', post_content='post2 content')
+post3 = Post.objects.create(post_author=author1, post_type='NEWS', post_title='post3 title', post_content='post3 content')
+post_category1 = PostCategory.objects.create(pc_post=post1, pc_category=category1)
+post_category2 = PostCategory.objects.create(pc_post=post1, pc_category=category2)
+post_category3 = PostCategory.objects.create(pc_post=post1, pc_category=category3)
+post_category4 = PostCategory.objects.create(pc_post=post2, pc_category=category4)
+post_category5 = PostCategory.objects.create(pc_post=post3, pc_category=category4)
+comment1 = Comment.objects.create(comment_post=post1, comment_user=user1, comment_content='comment1 content post1')
+comment2 = Comment.objects.create(comment_post=post2, comment_user=user2, comment_content='comment2 content post2')
+comment3 = Comment.objects.create(comment_post=post2, comment_user=user2, comment_content='comment3 content post2')
+comment4 = Comment.objects.create(comment_post=post3, comment_user=user1, comment_content='comment4 content post3')
+post1.like()
+post2.dislike()
+comment1.like()
+comment2.dislike()
+
+
+ba = Author.objects.all().order_by('-user_rating').first()
+print(f'\nBEST AUTHOR:\t{ba}\nUSER:\t\t{ba.author_user.username}\nRATING:\t\t{ba.user_rating}\n')
+
+bp = Post.objects.filter(post_type='ARTICLE').order_by('-post_rating').first()
+print(f'\nBEST POST:\t{bp}\nDT CREATE:\t{bp.post_create_datetime}\nUSER:\t\t{bp.post_author.author_user.username}\nRATING:\t\t{bp.post_rating}\nTITLE:\t\t{bp.post_title}\nPREVIEW:\t{bp.preview()}\n')
+
+for i in bp.comment_set.all():
+    print(f'\nCOMMENT:\t{i}\nDT CREATE:\t{i.comment_create_datetime}\nUSER:\t\t{i.comment_user}\nRATING:\t\t{i.comment_rating}\nCONTENT:\t{i.comment_content}\n')
+

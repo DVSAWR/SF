@@ -1,0 +1,35 @@
+
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+
+{% block title %}
+NEWS
+{% endblock title %}
+
+
+{% block content %}
+    <br>
+    <h1>NEWS LIST</h1>
+    <br>
+<!--    <p>OBJ LIST: {{ newslist }}</p>-->
+
+    <div>
+        {% if newslist %}
+            {% for i in newslist %}
+                <div align="left">
+                    <h4>POST_TITLE: {{ i.post_title|censor }}</h4>
+                    <p>POST_CREATE_DATETIME: {{ i.post_create_datetime }}</p>
+                    <p>POST_CONTENT: {{ i.post_content|truncatechars:21|censor }}</p>
+                </div>
+            {% endfor %}
+
+        {% else %}
+            <h2>News list is empty</h2>
+        {% endif %}
+    </div>
+
+
+
+{% endblock content %}
