@@ -15,6 +15,7 @@ News detail
 <div align="left">
 <!--    <h1>OBJ: {{ newsdetail }}</h1>-->
     <h2>POST_TITLE: {{ newsdetail.post_title|censor }}</h2>
+    <p>POST_TYPE: {{ i.post_type }}</p>
     <p>POST_CONTENT: {{ newsdetail.post_content|censor }}</p>
     <p>POST_CREATE_DATETIME: {{ newsdetail.post_create_datetime|date:'d-m-Y' }}</p>
 </div>

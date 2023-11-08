@@ -1,0 +1,81 @@
+
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+
+{% block title %}
+NEWS
+{% endblock title %}
+
+
+{% block content %}
+    <br>
+    <h1>NEWS LIST</h1>
+    <br>
+<!--    <p>OBJ LIST: {{ search }}</p>-->
+
+<form action="" method="get">
+
+   {{ filterset.form.as_p }}
+
+   <input type="submit" value="SEARCH BUTTON" />
+</form>
+
+    <div>
+        {% if search %}
+            {% for i in search %}
+                <div align="left">
+                    <h5>POST_TITLE: {{ i.post_title|censor }}</h5>
+                    <p><u>ID:</u> {{ i.id }}
+                    <u>POST_TYPE:</u> {{ i.post_type }}
+                    <u>POST_AUTHOR:</u> {{ i.post_author }}
+                        <br>
+                    <u>POST_CREATE_DATETIME:</u> {{ i.post_create_datetime }}
+                    <u>POST_CONTENT:</u> {{ i.post_content|truncatechars:21|censor }}</p>
+                </div>
+            {% endfor %}
+
+        {% else %}
+            <h2>News list is empty</h2>
+        {% endif %}
+    </div>
+
+{% if page_obj.has_other_pages %}
+    <nav>
+        {% if page_obj.previous_page_number != 1 %}
+            <a href="?{% url_replace page=1 %}">
+                1
+            </a>
+        {% endif %}
+
+
+        {% if page_obj.has_previous %}
+            <a href="?{% url_replace page=page_obj.previous_page_number %}">
+                {{ page_obj.previous_page_number }}
+            </a>
+        {% endif %}
+
+
+        {{ page_obj.number }}
+
+
+        {% if page_obj.has_next %}
+            <a href="?{% url_replace page=page_obj.next_page_number %}">
+                {{ page_obj.next_page_number }}
+            </a>
+        {% endif %}
+
+
+        {% if page_obj.next_page_number != page_obj.paginator.num_pages%}
+            <a href="?{% url_replace page=page_obj.paginator.num_pages %}">
+                {{ page_obj.paginator.num_pages }}
+            </a>
+        {% endif %}
+    </nav>
+{% endif %}
+
+{% endblock content %}
+
+
