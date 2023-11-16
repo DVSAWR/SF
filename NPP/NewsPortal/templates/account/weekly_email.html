@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weekly News Update</title>
+</head>
+<body>
+    <h1>Новые новости за неделю</h1>
+    <p>Здравствуйте, {{ username }},</p>
+    <p>Вот список новых новостей, появившихся за последнюю неделю:</p>
+    <ul>
+        {% for post in posts %}
+         <li><a href="http://127.0.0.1:8000{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

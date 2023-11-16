@@ -1,0 +1,64 @@
+{% extends 'flatpages/default.html' %}
+{%load custom_filters%}
+{% load custom_tags %}
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+   <h1>Все новости</h1>
+   {# Добавляем форму, которая объединяет набор полей, которые будут отправляться в запросе #}
+   <form action="" method="get">
+       {# Переменная, которую мы передали через контекст, может сгенерировать нам форму с полями #}
+       {{ filterset.form.as_p }}
+       {# Добавим кнопку отправки данных формы #}
+       <input type="submit" value="Найти" />
+   </form>
+   <h3>{{ time_now|date:'M d Y' }}</h3>
+   <h3>Количество новостей = {{newslist|length}}</h3>
+
+   <hr>
+   {% if newslist %}
+       <table>
+           <tr>
+               <td>Заголовок</td>
+               <td>Дата Публикации</td>
+               <td>Текст</td>
+               <td>Автор</td>
+           </tr>
+
+           {% for news in newslist %}
+           <tr>
+               <td>{{ news.title }}</td>
+               <td>{{news.date|date:'M d Y'}}</td>
+               <td>{{ news.text|truncatechars:20|censor}}</td>
+               <td>{{news.post_author}}</td>
+           </tr>
+           {% endfor %}
+
+       </table>
+   {% else %}
+       <h2>News not found!</h2>
+   {% endif %}
+
+    {# Пагинация #}
+
+    {% if page_obj.has_previous %}
+       {# Для каждой ссылки пагинации указываем обработку через новый тег #}
+       <a href="?{% url_replace page=1 %}">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+
+   {{ page_obj.number }}
+
+   {% if page_obj.has_next %}
+       <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
+{% endblock content %}
