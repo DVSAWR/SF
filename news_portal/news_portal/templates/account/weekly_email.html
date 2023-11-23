@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weekly News Update</title>
+</head>
+<body>
+    <h1>Weekly news</h1>
+    <p>Hola, {{ username }},</p>
+    <p>Here your weekly news:</p>
+    <ul>
+        {% for post in posts %}
+         <li><a href="http://127.0.0.1:8000{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
