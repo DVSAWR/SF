@@ -1,0 +1,86 @@
+{% extends 'flatpages/default.html' %}
+
+{%load custom_filters%}
+{% load custom_tags %}
+
+
+{% block title %}
+Categories
+{% endblock title %}
+{% block content %}
+<div align="center">
+
+    <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    tr {
+      border-bottom: 1px solid #ddd;
+    }
+    </style>
+
+    <h1>CATEGORIES</h1>
+    <h3>total: {{category_news_list|length}}</h3>
+
+    <table style="width: 30%; align: center">
+        <tr>
+            <td style="">Category title</td>
+            <td>Post count</td>
+            <td></td>
+        </tr>
+        {% for cat in category_news_list %}
+        <tr>
+            <td>{{ cat }}</td>
+            <td>{{ cat.post_set.count }}</td>
+            <td>
+                {% if request.user in cat.subscribers.all %}
+                <a href="{% url 'unsubscribe' cat.id %}">unsubscribe</a>
+                {% else %}
+                <a href="{% url 'subscribe' cat.id %}">subscribe</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+{% if page_obj.has_other_pages %}
+    <nav>
+        {% if page_obj.previous_page_number != 1 %}
+            <a href="?{% url_replace page=1 %}">
+                1
+            </a>
+        {% endif %}
+
+
+        {% if page_obj.has_previous %}
+            <a href="?{% url_replace page=page_obj.previous_page_number %}">
+                {{ page_obj.previous_page_number }}
+            </a>
+        {% endif %}
+
+
+        {{ page_obj.number }}
+
+
+        {% if page_obj.has_next %}
+            <a href="?{% url_replace page=page_obj.next_page_number %}">
+                {{ page_obj.next_page_number }}
+            </a>
+        {% endif %}
+
+
+        {% if page_obj.next_page_number != page_obj.paginator.num_pages%}
+            <a href="?{% url_replace page=page_obj.paginator.num_pages %}">
+                {{ page_obj.paginator.num_pages }}
+            </a>
+        {% endif %}
+    </nav>
+
+{% endif %}
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+<h1 align="center"> USER {{ object.id }} EDIT</h1>
+
+<div align="center">
+   <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save" />
+    </form>
+</div>
+
+{% endblock content %}
+

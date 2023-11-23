@@ -1,0 +1,83 @@
+
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+
+{% block title %}
+NEWS
+{% endblock title %}
+
+
+{% block content %}
+
+<div align="center">
+
+    <h1>NEWS SEARCH</h1>
+<img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTJtNnpkMHE1OWN4em1hcG5oc2tpZ3ZmemZpcjQ4NHpmcW4wcWVlciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xUA7aQJxHftDbAFMic/giphy.gif" alt="403" width=15%>
+
+
+<form action="" method="get">
+
+   {{ filterset.form.as_p }}
+<!--    <button type="submit">SEARCH</button>-->
+    <input type="submit" value="SEARCH" />
+
+
+</form>
+
+    <div>
+        {% if news_search %}
+            {% for i in news_search %}
+                <div>
+                    <a href="/news/{{i.id}}">
+                        <h4>POST_TITLE: {{ i.post_title|censor }}</h4>
+                        <p>POST_TYPE: {{ i.post_type }}</p>
+                        <p>POST_CREATE_DATETIME: {{ i.post_create_datetime }}</p>
+                        <p>POST_CONTENT: {{ i.post_content|truncatechars:20|censor }}</p>
+                        <p>ID: {{ i.id }}</p>
+                    </a>
+                </div>
+            {% endfor %}
+
+        {% else %}
+            <h2>News list is empty</h2>
+        {% endif %}
+    </div>
+
+{% if page_obj.has_other_pages %}
+    <nav>
+        {% if page_obj.previous_page_number != 1 %}
+            <a href="?{% url_replace page=1 %}">
+                1
+            </a>
+        {% endif %}
+
+
+        {% if page_obj.has_previous %}
+            <a href="?{% url_replace page=page_obj.previous_page_number %}">
+                {{ page_obj.previous_page_number }}
+            </a>
+        {% endif %}
+
+
+        {{ page_obj.number }}
+
+
+        {% if page_obj.has_next %}
+            <a href="?{% url_replace page=page_obj.next_page_number %}">
+                {{ page_obj.next_page_number }}
+            </a>
+        {% endif %}
+
+
+        {% if page_obj.next_page_number != page_obj.paginator.num_pages%}
+            <a href="?{% url_replace page=page_obj.paginator.num_pages %}">
+                {{ page_obj.paginator.num_pages }}
+            </a>
+        {% endif %}
+    </nav>
+{% endif %}
+</div>
+{% endblock content %}

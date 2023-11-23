@@ -1,0 +1,32 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+
+{% block title %}
+News detail
+{% endblock title %}
+
+
+{% block content %}
+
+<div align="center">
+    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdG92N2M0bTloZXUyeWh2czZpN2Zva3F3cTNjenRnM3RnbnhjZ2thcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fAKYGpjfM6OLUa6ZLp/giphy.gif" alt="news" width=15%>
+</div>
+
+
+
+<div align="center">
+    <h2>{{ news_detail.post_title|censor }}</h2>
+    <p>{{ news_detail.post_content|censor }}</p>
+    <p>{{ news_detail.post_create_datetime|date:'d-m-Y' }}</p>
+</div>
+
+<div align="center">
+   <a href="./{{ news_detail.id }}/edit"><button>/edit</button></a>
+   <a href="./{{ news_detail.id }}/delete"><button>/delete</button></a>
+</div>
+
+
+{% endblock content %}
+

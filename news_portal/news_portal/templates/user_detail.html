@@ -1,0 +1,39 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+
+{% block title %}
+USER DETAIL
+{% endblock title %}
+
+
+{% block content %}
+
+
+
+<div align="center">
+    <h1>USERNAME: {{ user_detail.username }}</h1>
+    <p>USER ID: {{ user_detail.id }}</p>
+    <p>USER BIO: {{ user_detail.bio }}</p>
+    <p>{{ request.user.groups.values }}</p>
+
+</div>
+
+<br>
+<br>
+<div align="center">
+    <a href="./{{ user_detail.id }}/edit"><button>/edit</button></a>
+</div>
+
+<div align="center">
+    {% if is_not_premium %}
+    <a href="/news/join/"> <button>JOIN AUTHOR GROUP</button></a>
+    {% endif %}
+</div>
+
+
+
+
+{% endblock content %}
+
