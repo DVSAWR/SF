@@ -2,7 +2,7 @@ from django.urls import reverse_lazy, reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, AccessMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from rest_framework.authentication import SessionAuthentication
@@ -10,6 +10,19 @@ from rest_framework.authentication import SessionAuthentication
 from .models import Post, Author, Category, User
 from .filters import PostFilter, FilterSet
 from .forms import PostForm, AuthorForm, UserForm
+
+
+class AuthorRequiredMixin(AccessMixin):
+
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        # print('-!!!!!------------------------', obj.post_author.author_user, request.user)
+        # print(request.user.is_authenticated)
+        # print(obj.post_author.author_user != request.user)
+
+        if not request.user.is_authenticated or obj.post_author.author_user != request.user:
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
 
 
 class PostList(ListView):
@@ -57,6 +70,7 @@ class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
             post.post_type = 'ARL'
         elif 'news/create/' in self.request.path:
             post.post_type = 'NWS'
+        post.post_author = Author.objects.get(author_user=self.request.user)
         post.save()
         return super().form_valid(form)
 
@@ -68,7 +82,7 @@ class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     template_name = 'news_edit.html'
 
 
-class PostDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+class PostDelete(AuthorRequiredMixin, PermissionRequiredMixin, DeleteView):
     permission_required = ('news.delete_post',)
     model = Post
     template_name = 'news_delete.html'
@@ -124,10 +138,12 @@ def unsubscribe(request, pk):
 @login_required
 def join_author_group(request):
     user = request.user
+    Author.objects.create(author_user=user)
     author_group = Group.objects.get(name='authors')
     if not request.user.groups.filter(name='authors').exists():
         author_group.user_set.add(user)
     return redirect('/news/categories')
+
 
 
 
