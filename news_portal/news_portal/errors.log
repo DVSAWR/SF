@@ -1,0 +1,303 @@
+2024-01-11 20:59:10,090, ERROR, D:\CODE projects\news_portal\venv\Lib\site-packages\django\utils\log.py, Internal Server Error: /news/join/, (<class 'django.db.utils.IntegrityError'>, IntegrityError('UNIQUE constraint failed: news_author.author_user_id'), <traceback object at 0x000001BDD7638300>)
+Traceback (most recent call last):
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: news_author.author_user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\news_portal\news\views.py", line 141, in join_author_group
+    Author.objects.create(author_user=user)
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: news_author.author_user_id
+2024-01-11 20:59:10,096, ERROR, D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\servers\basehttp.py, "GET /news/join/ HTTP/1.1" 500 167917, None
+2024-01-11 21:05:25,407, ERROR, D:\CODE projects\news_portal\venv\Lib\site-packages\django\utils\log.py, Internal Server Error: /news/create/, (<class 'news.models.Author.DoesNotExist'>, DoesNotExist('Author matching query does not exist.'), <traceback object at 0x000001BDD78D7C00>)
+Traceback (most recent call last):
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 109, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\edit.py", line 184, in post
+    return super().post(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\edit.py", line 153, in post
+    return self.form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\news_portal\news\views.py", line 73, in form_valid
+    post.post_author = Author.objects.get(author_user=self.request.user)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+news.models.Author.DoesNotExist: Author matching query does not exist.
+2024-01-11 21:05:25,410, ERROR, D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\servers\basehttp.py, "POST /news/create/ HTTP/1.1" 500 112266, None
+2024-01-11 21:05:52,108, ERROR, D:\CODE projects\news_portal\venv\Lib\site-packages\django\utils\log.py, Internal Server Error: /news/create/, (<class 'AttributeError'>, AttributeError("'Post' object has no attribute 'title'"), <traceback object at 0x000001BDD7790300>)
+Traceback (most recent call last):
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 109, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\edit.py", line 184, in post
+    return super().post(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\edit.py", line 153, in post
+    return self.form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\news_portal\news\views.py", line 75, in form_valid
+    return super().form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\edit.py", line 135, in form_valid
+    self.object = form.save()
+                  ^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\forms\models.py", line 543, in save
+    self._save_m2m()
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\forms\models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\fields\related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 1447, in _add_items
+    signals.m2m_changed.send(
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\dispatch\dispatcher.py", line 176, in send
+    return [
+           ^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\dispatch\dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\news_portal\news\signals.py", line 19, in notify_about_new_post
+    send_notifications(instance.preview, instance.pk, instance.title, subscribers_email)
+                                                      ^^^^^^^^^^^^^^
+AttributeError: 'Post' object has no attribute 'title'
+2024-01-11 21:05:52,112, ERROR, D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\servers\basehttp.py, "POST /news/create/ HTTP/1.1" 500 150055, None
+2024-01-11 21:26:44,402, ERROR, D:\CODE projects\news_portal\venv\Lib\site-packages\django\utils\log.py, Internal Server Error: /news/create/, (<class 'django.template.exceptions.TemplateDoesNotExist'>, TemplateDoesNotExist('email_template.html'), <traceback object at 0x000001DD64CE4800>)
+Traceback (most recent call last):
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 109, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\edit.py", line 184, in post
+    return super().post(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\edit.py", line 153, in post
+    return self.form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\news_portal\news\views.py", line 75, in form_valid
+    return super().form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\edit.py", line 135, in form_valid
+    self.object = form.save()
+                  ^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\forms\models.py", line 543, in save
+    self._save_m2m()
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\forms\models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\fields\related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 1447, in _add_items
+    signals.m2m_changed.send(
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\dispatch\dispatcher.py", line 176, in send
+    return [
+           ^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\dispatch\dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\news_portal\news\signals.py", line 19, in notify_about_new_post
+    send_notifications(instance.preview, instance.pk, instance.post_title, subscribers_email)
+  File "D:\CODE projects\news_portal\news_portal\news\signals.py", line 23, in send_notifications
+    html_content = render_to_string(
+                   ^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: email_template.html
+2024-01-11 21:26:44,408, ERROR, D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\servers\basehttp.py, "POST /news/create/ HTTP/1.1" 500 165266, None
+2024-01-11 21:29:31,958, ERROR, D:\CODE projects\news_portal\venv\Lib\site-packages\django\utils\log.py, Internal Server Error: /news/create/, (<class 'ValueError'>, ValueError('Invalid address ""'), <traceback object at 0x000001DD64CB3E40>)
+Traceback (most recent call last):
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\mail\message.py", line 86, in sanitize_address
+    token, rest = parser.get_mailbox(addr)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gruzd\AppData\Local\Programs\Python\Python311\Lib\email\_header_value_parser.py", line 1791, in get_mailbox
+    token, value = get_name_addr(value)
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gruzd\AppData\Local\Programs\Python\Python311\Lib\email\_header_value_parser.py", line 1760, in get_name_addr
+    if value[0] in CFWS_LEADER:
+       ~~~~~^^^
+IndexError: string index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 109, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\edit.py", line 184, in post
+    return super().post(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\edit.py", line 153, in post
+    return self.form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\news_portal\news\views.py", line 75, in form_valid
+    return super().form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\views\generic\edit.py", line 135, in form_valid
+    self.object = form.save()
+                  ^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\forms\models.py", line 543, in save
+    self._save_m2m()
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\forms\models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\fields\related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 1447, in _add_items
+    signals.m2m_changed.send(
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\dispatch\dispatcher.py", line 176, in send
+    return [
+           ^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\dispatch\dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\news_portal\news\signals.py", line 19, in notify_about_new_post
+    send_notifications(instance.preview, instance.pk, instance.post_title, subscribers_email)
+  File "D:\CODE projects\news_portal\news_portal\news\signals.py", line 37, in send_notifications
+    msg.send()
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\mail\message.py", line 298, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\mail\backends\smtp.py", line 134, in send_messages
+    sent = self._send(message)
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\mail\backends\smtp.py", line 146, in _send
+    from_email = sanitize_address(email_message.from_email, encoding)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\mail\message.py", line 88, in sanitize_address
+    raise ValueError('Invalid address "%s"' % addr)
+ValueError: Invalid address ""
+2024-01-11 21:29:31,963, ERROR, D:\CODE projects\news_portal\venv\Lib\site-packages\django\core\servers\basehttp.py, "POST /news/create/ HTTP/1.1" 500 182803, None

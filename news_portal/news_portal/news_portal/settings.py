@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+import logging
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,7 +31,122 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1']
 
 
-# Application definition
+logger = logging.getLogger(__name__)
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "style": "{",
+    "filters": {
+        "require_debug_true": {
+            "()": "django.utils.log.RequireDebugTrue",
+        },
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+        }
+    },
+
+
+    "formatters": {
+        "DEBUG_log": {
+            "format": "%(asctime)s - %(levelname)s, Message: %(message)s",
+        },
+        "INFO_log": {
+            "format": '%(asctime)s - %(levelname)s, Module: "%(module)s", Message: %(message)s',
+        },
+        "WARNING_log": {
+            "format": "Path-name %(pathname)s",
+        },
+        "ERROR_log": {
+            "format": "%(asctime)s, %(levelname)s, %(pathname)s, %(message)s, %(exc_info)s",
+        },
+    },
+
+
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "filters": ["require_debug_true"],
+            "class": "logging.StreamHandler",
+            "formatter": "DEBUG_log",
+        },
+        "console_warning": {
+            "level": "WARNING",
+            "filters": ["require_debug_true"],
+            "class": "logging.StreamHandler",
+            "formatter": "WARNING_log",
+        },
+
+        "general_log_file": {
+            "level": "INFO",
+            "filters": ["require_debug_true"],
+            "class": "logging.FileHandler",
+            "formatter": "INFO_log",
+            "filename": "general.log",
+        },
+        "warning_to_file": {
+            "level": "WARNING",
+            "filters": ["require_debug_false"],
+            "class": "logging.FileHandler",
+            "formatter": "WARNING_log",
+            "filename": "general.log",
+        },
+        "errors_log_file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "formatter": "ERROR_log",
+            "filename": "errors.log",
+        },
+        "security_log_file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "formatter": "ERROR_log",
+            "filename": "security.log",
+        },
+        "mail_admins": {
+            "level": "ERROR",
+            "filters": ["require_debug_false"],
+            "class": "django.utils.log.AdminEmailHandler",
+            "email_backend": "django.core.mail.backends.filebased.EmailBackend",
+            "formatter": "ERROR_log",
+        },
+    },
+
+
+    "loggers": {
+        "django": {
+            "handlers": [
+                "console",
+                "console_warning",
+                "general_log_file",
+                "warning_to_file",
+            ],
+            "propagate": True,
+        },
+        "django.template": {
+            "handlers": ["errors_log_file"],
+            "propagate": False,
+        },
+        "django.db.backends": {
+            "handlers": ["errors_log_file"],
+            "propagate": False,
+        },
+        "django.server": {
+            "handlers": ["mail_admins", "errors_log_file"],
+            "propagate": True,
+        },
+        "django.request": {
+            "handlers": ["mail_admins", "errors_log_file"],
+            "propagate": False,
+        },
+        "django.security": {
+            "handlers": ["security_log_file"],
+            "propagate": False,
+        },
+    },
+}
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -94,6 +211,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
 ]
+
+
 
 ROOT_URLCONF = 'news_portal.urls'
 

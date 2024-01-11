@@ -16,7 +16,7 @@ def notify_about_new_post(sender, instance, **kwargs):
         for i in categories:
             subscribers = i.subscribers.all()
             subscribers_email += [s.email for s in subscribers]
-        send_notifications(instance.preview, instance.pk, instance.title, subscribers_email)
+        send_notifications(instance.preview, instance.pk, instance.post_title, subscribers_email)
 
 
 def send_notifications(preview, pk, post_title, subscribers):
